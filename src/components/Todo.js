@@ -1,6 +1,7 @@
 import React from 'react'
 
 const Todo = ({ todo, index, completeTodo, deleteTodo }) => {
+  
   return (
     <div className="list-group-item">
       <span style={{ textDecoration: todo.isComplete ? 'line-through' : '' }}>

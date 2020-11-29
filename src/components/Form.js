@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 const Form = ({ addTodo }) => {
   const [value, setValue] = useState('')
@@ -8,6 +8,10 @@ const Form = ({ addTodo }) => {
     addTodo(value)
     setValue('')
   }
+
+  useEffect(() => {
+    console.log('useEffect launched')
+  })
   return (
     <form onSubmit={handleSubmit} className="form-group">
       <input
