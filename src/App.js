@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './App.css'
 
@@ -6,7 +6,9 @@ import Form from './components/Form'
 import Todo from './components/Todo'
 
 const App = () => {
-  const [todos, setTodos] = useState([])
+  const localTodos = JSON.parse(localStorage.getItem('todos'))
+
+  const [todos, setTodos] = useState(localTodos || [])
   const addTodo = (text) => {
     const newTodos = [
       ...todos,
@@ -22,7 +24,9 @@ const App = () => {
     newTodos[index].isComplete = !newTodos[index].isComplete
     setTodos(newTodos)
   }
-
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos))
+  })
   const deleteTodo = (index) => {
     setTodos(
       todos.filter((todo, i) => {
