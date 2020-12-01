@@ -1,9 +1,13 @@
 const express = require('express')
 const path = require('path')
 const app = express()
+const logger = require('morgan')
+const fs = require('fs')
 
 const port = process.env.PORT || 5000
+let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
+app.use(logger('common', { stream: accessLogStream}))
 app.use(express.static(path.join(__dirname, 'build')))
 
 app.get('/', function (req, res) {
