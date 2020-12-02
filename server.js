@@ -7,6 +7,7 @@ const fs = require('fs')
 const port = process.env.PORT || 5000
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' })
 
+app.enable('trust proxy')
 app.use(logger('common', { stream: accessLogStream}))
 app.use(express.static(path.join(__dirname, 'build')))
 
