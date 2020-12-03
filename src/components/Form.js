@@ -10,8 +10,9 @@ const Form = ({ addTodo }) => {
   }
 
   useEffect(() => {
-    console.log('useEffect launched')
-  })
+    console.log('Todo value changed')
+  }, [value])
+
   return (
     <form onSubmit={handleSubmit} className="form-group">
       <input
