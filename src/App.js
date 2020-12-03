@@ -4,6 +4,7 @@ import './App.css'
 
 import Form from './components/Form'
 import Todo from './components/Todo'
+import Note from './components/Note'
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -23,11 +24,13 @@ const App = () => {
     ]
     setTodos(newTodos)
   }
+
   const completeTodo = (index) => {
     const newTodos = [...todos]
     newTodos[index].isComplete = !newTodos[index].isComplete
     setTodos(newTodos)
   }
+
   const deleteTodo = (index) => {
     setTodos(
       todos.filter((todo, i) => {
@@ -35,12 +38,14 @@ const App = () => {
       })
     )
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
     setnotes([...notes, { noteText, noteBody }])
     setNoteText('')
     setNoteBody('')
   }
+
   const removeNote = (index) => {
     console.log(index)
     setnotes(
@@ -50,10 +55,12 @@ const App = () => {
     )
   }
 
+
+
   useEffect(() => {
     console.log('Always runs (from top level App component)')
   })
-  // Will always run since no dependency array was provided 
+  // Will always run since no dependency array was provided
 
   useEffect(() => {
     const localNotes = JSON.parse(localStorage.getItem('notes'))
@@ -64,14 +71,14 @@ const App = () => {
     if (localTodos) {
       setTodos(localTodos)
     }
-  }, []) 
+  }, [])
   // Fetches data, only runs once
 
   useEffect(() => {
     console.log('Runs only once')
-  }, []) 
-  // Empty array as a depndency signals to run only once. 
-  // Without a dependency list it will run when anything changes. 
+  }, [])
+  // Empty array as a depndency signals to run only once.
+  // Without a dependency list it will run when anything changes.
   // With empty array, it will run only when mounted
 
   useEffect(() => {
@@ -83,12 +90,10 @@ const App = () => {
     localStorage.setItem('todos', JSON.stringify(todos))
     localStorage.setItem('notes', JSON.stringify(notes))
     document.title = noteText || 'hello'
-  //}, [count]) 
-  // This won't work because the effect makes changes to other state than count
-  // All dependencies affected in the callback function you provide must be in the dependency array
-  }, [todos, notes, noteText]) 
-
-
+    //}, [count])
+    // This won't work because the effect makes changes to other state than count
+    // All dependencies affected in the callback function you provide must be in the dependency array
+  }, [todos, notes, noteText])
 
   return (
     <div className="container mt-3">
@@ -143,14 +148,15 @@ const App = () => {
             />
           </p>
           <h1 className="display-4">Notes</h1>
-          <hr/>
+          <hr />
           {notes.map((note, index) => {
             return (
-              <div key={index}>
-                <h2>{note.noteText}</h2>
-                <p>{note.noteBody}</p>
-                <button className="btn btn-outline-primary mb-2" onClick={() => removeNote(index)}>Delete note</button>
-              </div>
+              <Note
+                key={index}
+                index={index}
+                note={note}
+                removeNote={removeNote}
+              />
             )
           })}
           <form onSubmit={handleSubmit}>
@@ -166,7 +172,9 @@ const App = () => {
               onChange={(e) => setNoteBody(e.target.value)}
               placeholder="Note body"
             />
-            <button className="btn btn-outline-primary" type="submit">Add Note</button>
+            <button className="btn btn-outline-primary" type="submit">
+              Add Note
+            </button>
           </form>
         </div>
       </div>
