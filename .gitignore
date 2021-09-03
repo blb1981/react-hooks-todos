@@ -27,3 +27,6 @@ yarn-error.log*
 
 # logs
 access.log
+
+# more misc
+.eslintcache

@@ -4,7 +4,7 @@ import './App.css'
 
 import Form from './components/Form'
 import Todo from './components/Todo'
-import Note from './components/Note'
+// import Note from './components/Note'
 
 const App = () => {
   const [count, setCount] = useState(0)
@@ -55,8 +55,6 @@ const App = () => {
     )
   }
 
-
-
   useEffect(() => {
     console.log('Always runs (from top level App component)')
   })
@@ -89,7 +87,7 @@ const App = () => {
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
     localStorage.setItem('notes', JSON.stringify(notes))
-    document.title = noteText || 'hello'
+    // document.title = noteText || 'hello'
     //}, [count])
     // This won't work because the effect makes changes to other state than count
     // All dependencies affected in the callback function you provide must be in the dependency array
@@ -115,67 +113,73 @@ const App = () => {
               )
             })}
           </ul>
-          <p>
-            Current {text || 'count'} is {count}
-          </p>
-          <p>
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setCount(count - 1)}
-            >
-              -1
-            </button>{' '}
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setCount(0)}
-            >
-              Reset
-            </button>{' '}
-            <button
-              className="btn btn-outline-primary"
-              onClick={() => setCount(count + 1)}
-            >
-              +1
-            </button>
-          </p>
-          <p>
-            <input
-              className="form-control"
-              type="text"
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              placeholder={text || 'count'}
-            />
-          </p>
-          <h1 className="display-4">Notes</h1>
-          <hr />
-          {notes.map((note, index) => {
-            return (
-              <Note
-                key={index}
-                index={index}
-                note={note}
-                removeNote={removeNote}
+          {/* Counter */}
+          {/* <div>
+            <p>
+              Current {text || 'count'} is {count}
+            </p>
+            <p>
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => setCount(count - 1)}
+              >
+                -1
+              </button>{' '}
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => setCount(0)}
+              >
+                Reset
+              </button>{' '}
+              <button
+                className="btn btn-outline-primary"
+                onClick={() => setCount(count + 1)}
+              >
+                +1
+              </button>
+            </p>
+            <p>
+              <input
+                className="form-control"
+                type="text"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder={text || 'count'}
               />
-            )
-          })}
-          <form onSubmit={handleSubmit}>
-            <input
-              className="form-control mb-2"
-              value={noteText}
-              onChange={(e) => setNoteText(e.target.value)}
-              placeholder="Note title"
-            />
-            <textarea
-              className="form-control mb-2"
-              value={noteBody}
-              onChange={(e) => setNoteBody(e.target.value)}
-              placeholder="Note body"
-            />
-            <button className="btn btn-outline-primary" type="submit">
-              Add Note
-            </button>
-          </form>
+            </p>
+          </div> */}
+          {/* Notes */}
+          {/* <div>
+            <h1 className="display-4">Notes</h1>
+            <hr />
+            {notes.map((note, index) => {
+              return (
+                <Note
+                  key={index}
+                  index={index}
+                  note={note}
+                  removeNote={removeNote}
+                />
+              )
+            })}
+            <form onSubmit={handleSubmit}>
+              <input
+                className="form-control mb-2"
+                value={noteText}
+                onChange={(e) => setNoteText(e.target.value)}
+                placeholder="Note title"
+              />
+              <textarea
+                className="form-control mb-2"
+                value={noteBody}
+                onChange={(e) => setNoteBody(e.target.value)}
+                placeholder="Note body"
+              />
+              <button className="btn btn-outline-primary" type="submit">
+                Add Note
+              </button>
+            </form>
+          </div> */}
         </div>
       </div>
     </div>
